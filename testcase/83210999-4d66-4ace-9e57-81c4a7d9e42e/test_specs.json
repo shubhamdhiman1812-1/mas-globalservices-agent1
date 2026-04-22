@@ -1,0 +1,17 @@
+{
+  "name": "process_blob_event_performance_under_load",
+  "description": "Measures the performance of FSRAgent.process_blob_event under concurrent requests to ensure response time is within acceptable limits.",
+  "test_type": "performance",
+  "input": "Multiple concurrent valid BlobEvent requests (e.g., 20+), each with a valid PDF.",
+  "output": "A list of responses, each as per the functional success case.",
+  "success_criteria": [
+    "All responses are returned within a predefined SLA (e.g., < 5 seconds each)",
+    "No timeouts or resource exhaustion errors occur",
+    "No degradation in extraction or routing accuracy"
+  ],
+  "error_scenarios": [
+    "Timeouts",
+    "Resource exhaustion",
+    "Performance degradation"
+  ]
+}
