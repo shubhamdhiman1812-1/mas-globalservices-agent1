@@ -1,0 +1,16 @@
+{
+  "name": "process_blob_event_low_confidence_routing",
+  "description": "Ensures FSRAgent.process_blob_event correctly routes to human review when a critical field's confidence is below threshold.",
+  "test_type": "functional",
+  "input": "A BlobEvent with valid PDF, but the extraction/canonicalization returns at least one critical field with confidence < 0.60.",
+  "output": "A dict with 'success': False, 'error_code': 'ERR_LOW_CONFIDENCE', and fallback error message.",
+  "success_criteria": [
+    "response['success'] is False",
+    "response['error_code'] == 'ERR_LOW_CONFIDENCE'",
+    "response['error'] contains 'routed for human review'"
+  ],
+  "error_scenarios": [
+    "Extraction fails",
+    "Canonicalization fails"
+  ]
+}
