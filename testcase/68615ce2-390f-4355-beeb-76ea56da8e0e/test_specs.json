@@ -1,0 +1,18 @@
+{
+  "name": "process_blob_event_integration_with_blob_storage_and_eventhub",
+  "description": "Tests the integration of FSRAgent.process_blob_event with Azure Blob Storage and EventHub, ensuring blobs are downloaded, payloads are written, and notifications are sent.",
+  "test_type": "integration",
+  "input": "A BlobEvent referencing an actual PDF in a test Azure Blob Storage container, with valid SAS token and EventHub configuration.",
+  "output": "A dict with 'success': True and confirmation that the payload is written and notification sent.",
+  "success_criteria": [
+    "Blob is downloaded from Azure Blob Storage",
+    "Payload is written to the fsr-extracted container",
+    "Notification is sent to EventHub",
+    "response['success'] is True"
+  ],
+  "error_scenarios": [
+    "Blob download fails due to invalid SAS token",
+    "Blob write fails due to storage permissions",
+    "EventHub notification fails"
+  ]
+}
