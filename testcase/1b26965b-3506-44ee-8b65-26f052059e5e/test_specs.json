@@ -1,0 +1,19 @@
+{
+  "name": "process_blob_event_successful_pdf_extraction",
+  "description": "Validates the end-to-end workflow of FSRAgent.process_blob_event for a valid PDF blob event, ensuring extraction, canonicalization, confidence validation, routing, output writing, and downstream notification all succeed.",
+  "test_type": "functional",
+  "input": "A BlobEvent instance with valid container_name, blob_name, sas_token, and blob_properties indicating a PDF file under 50MB.",
+  "output": "A dict with 'success': True, including idempotency_key, routing, and confidence_result.",
+  "success_criteria": [
+    "response['success'] is True",
+    "response['result'] contains 'idempotency_key'",
+    "response['result']['routing']['routed_to'] == 'output'",
+    "response['result']['confidence_result']['all_critical_fields_above_threshold'] is True"
+  ],
+  "error_scenarios": [
+    "Blob download fails",
+    "Extraction fails",
+    "Output writing fails",
+    "Downstream notification fails"
+  ]
+}
