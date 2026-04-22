@@ -1,0 +1,16 @@
+{
+  "name": "process_blob_event_security_invalid_sas_token",
+  "description": "Ensures that FSRAgent.process_blob_event securely handles invalid or expired SAS tokens, returning an appropriate error and not leaking sensitive information.",
+  "test_type": "security",
+  "input": "A BlobEvent with an invalid or expired sas_token.",
+  "output": "A dict with 'success': False, 'error_code': 'ERR_BLOB_DOWNLOAD', and a secure error message.",
+  "success_criteria": [
+    "response['success'] is False",
+    "response['error_code'] == 'ERR_BLOB_DOWNLOAD'",
+    "No sensitive information is leaked in the error message"
+  ],
+  "error_scenarios": [
+    "BlobClient raises AzureError",
+    "Unhandled exceptions during blob download"
+  ]
+}
