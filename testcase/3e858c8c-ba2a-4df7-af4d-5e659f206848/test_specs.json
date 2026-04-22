@@ -1,0 +1,16 @@
+{
+  "name": "process_blob_event_security_content_safety_enforced",
+  "description": "Verifies that content safety guardrails are enforced during extraction and output, blocking or flagging unsafe content.",
+  "test_type": "security",
+  "input": "A BlobEvent with a PDF containing content that should trigger content safety (e.g., toxic or credential output).",
+  "output": "A dict with 'success': False and an error or flag indicating content safety violation.",
+  "success_criteria": [
+    "response['success'] is False",
+    "response['error'] contains 'content safety' or similar",
+    "No unsafe content is present in the output"
+  ],
+  "error_scenarios": [
+    "Content safety decorator fails",
+    "Extraction proceeds despite unsafe content"
+  ]
+}
