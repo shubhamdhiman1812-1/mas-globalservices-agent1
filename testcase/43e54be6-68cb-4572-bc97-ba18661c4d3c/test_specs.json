@@ -1,0 +1,16 @@
+{
+  "name": "process_blob_event_invalid_file_type",
+  "description": "Checks that FSRAgent.process_blob_event rejects non-PDF files and returns the correct error.",
+  "test_type": "functional",
+  "input": "A BlobEvent with blob_properties indicating a non-PDF content_type (e.g., 'image/png').",
+  "output": "A dict with 'success': False, 'error_code': 'ERR_INVALID_FILE_TYPE', and appropriate error message.",
+  "success_criteria": [
+    "response['success'] is False",
+    "response['error_code'] == 'ERR_INVALID_FILE_TYPE'",
+    "response['error'] contains 'File is not a PDF'"
+  ],
+  "error_scenarios": [
+    "Blob properties missing content_type",
+    "Unexpected exception in file validation"
+  ]
+}
